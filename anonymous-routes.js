@@ -18,9 +18,11 @@ app.get('/api/random-quote', function(req, res) {
             var results = [];
             _.each(data, function (curRow) {
                 var nameAndCount = new Object();
-                nameAndCount["Error Description"] = curRow["Error Description"];
-                nameAndCount["count"] = curRow["count"];
-                results.push(nameAndCount);
+                nameAndCount["Error"] = curRow["Error Description"];
+                nameAndCount["count"] = parseInt(curRow["count"]);
+                if (nameAndCount["Error"].indexOf("No Errors") === -1) {
+                    results.push(nameAndCount);
+                }
             });
             console.log(JSON.stringify(results));
             res.status(200).send(JSON.stringify(results));
