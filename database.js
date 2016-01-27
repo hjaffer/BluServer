@@ -7,6 +7,3 @@ module.exports = {
         return database;
     }
 };
-
-//module.exports = pgp(cn);
-console.log('here');
