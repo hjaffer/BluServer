@@ -1,0 +1,8 @@
+{
+  "name": "Blu Database Info Server",
+  "description": "Produces charts/graphs of Blu data",
+  "repository": "https://github.com/heroku/node-js-getting-started",
+  "logo": "http://node-js-sample.herokuapp.com/node.svg",
+  "keywords": ["node", "express", "static"],
+  "image": "heroku/nodejs"
+}

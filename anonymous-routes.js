@@ -110,3 +110,42 @@ app.get('/api/sys_tests_retest_to_pass', function(req, res) {
             console.log(error);
         });
 });
+
+
+
+
+app.get('/api/getHistory', function(req, res) {
+    var pcbLogsQueryStr =
+        "SELECT * FROM pcb_test_logs WHERE \"Serial No\"='" +
+        req.query.serialNumber + "'";
+    var sysLogsQueryStr =
+        "SELECT * FROM sys_test_logs WHERE \"Serial Number\"='" +
+        req.query.serialNumber + "'";
+    var results = [];
+
+    db.query(pcbLogsQueryStr)
+        .then(function (data) {
+            _.each(data, function (curRow) {
+                results.push(curRow);
+            });
+        })
+        .then(function() {
+            db.query(sysLogsQueryStr)
+                .then(function (data) {
+                    _.each(data, function (curRow) {
+                        results.push(curRow);
+                    });
+                })
+                .then(function() {
+                    res.status(200).send(JSON.stringify(results, null, '<br>'));
+                })
+                .catch(function (error) {
+                    return res.status(401).send("Error retrieving data");
+                    console.log(error);
+                });
+        })
+        .catch(function (error) {
+            return res.status(401).send("Error retrieving data");
+            console.log(error);
+        });
+});
